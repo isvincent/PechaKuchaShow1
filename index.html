@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PechaKucha 互動教室｜首頁</title>
+<meta name="description" content="九間 PechaKucha 20×20 簡報技巧互動教室的入口首頁">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --fs:21px;
+  --ink:#24203a; --muted:#5b5675; --paper:#fffaf2; --card:#ffffff;
+  --c1:#ff5d73; --c2:#ff9f1c; --c3:#ffd23f; --c4:#2ec4b6; --c5:#3a86ff; --c6:#8338ec; --c7:#ff6bcb; --c8:#06d6a0; --c9:#f15bb5;
+  --shadow:0 10px 30px rgba(60,40,120,.15);
+}
+*{box-sizing:border-box}
+html{font-size:var(--fs);scroll-behavior:smooth}
+body{margin:0;font-family:"Noto Sans TC","Microsoft JhengHei",system-ui,sans-serif;color:var(--ink);line-height:1.65;
+  background:radial-gradient(circle at 8% 10%,#ffe3ec 0,transparent 38%),radial-gradient(circle at 92% 6%,#dff3ff 0,transparent 40%),
+  radial-gradient(circle at 50% 100%,#fff1c9 0,transparent 45%),var(--paper);min-height:100vh;overflow-x:hidden}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:inherit}
+.wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+
+/* ---------- top bar ---------- */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(255,250,242,.88);backdrop-filter:blur(10px);border-bottom:3px solid #ffe1a8}
+.topbar .wrap{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-top:10px;padding-bottom:10px}
+.logo{font-weight:900;font-size:1.15rem;display:flex;align-items:center;gap:8px;margin-right:auto}
+.logo span{background:linear-gradient(90deg,var(--c1),var(--c6));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tool{border:3px solid var(--ink);background:#fff;border-radius:999px;padding:6px 14px;font-weight:900;box-shadow:3px 3px 0 var(--ink);transition:transform .12s}
+.tool:hover{transform:translate(-2px,-2px);box-shadow:5px 5px 0 var(--ink)}
+.tool:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--ink)}
+.tool[aria-pressed="true"]{background:var(--c3)}
+.fsgroup{display:flex;gap:6px}
+
+/* ---------- hero ---------- */
+.hero{padding:44px 0 20px;position:relative}
+.hero h1{font-size:clamp(2.1rem,6vw,3.6rem);line-height:1.15;margin:0 0 14px;font-weight:900}
+.hero h1 .hl{background:linear-gradient(90deg,var(--c1),var(--c2),var(--c5),var(--c6));background-size:300% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:flow 6s linear infinite}
+@keyframes flow{to{background-position:300% 0}}
+.hero p{font-size:1.1rem;color:var(--muted);max-width:780px;margin:0 0 22px}
+.chips20{display:grid;grid-template-columns:repeat(20,1fr);gap:5px;max-width:760px;margin:6px 0 22px}
+.chips20 i{height:30px;border-radius:6px;background:#eee;transition:background .3s,transform .3s}
+.chips20 i.on{transform:translateY(-4px)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:14px}
+.big{border:none;border-radius:18px;padding:14px 24px;font-size:1.1rem;font-weight:900;color:#fff;box-shadow:0 6px 0 rgba(0,0,0,.18);transition:transform .12s}
+.big:hover{transform:translateY(-3px)}
+.big:active{transform:translateY(3px);box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.b1{background:linear-gradient(135deg,var(--c1),var(--c2))}
+.b2{background:linear-gradient(135deg,var(--c5),var(--c6))}
+.b3{background:linear-gradient(135deg,var(--c4),var(--c8))}
+
+/* ---------- progress ---------- */
+.progress{background:#fff;border-radius:24px;box-shadow:var(--shadow);padding:18px 22px;margin:18px 0 10px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.progress .bar{flex:1 1 260px;height:26px;background:#f0ecff;border-radius:999px;overflow:hidden}
+.progress .bar div{height:100%;width:0;background:linear-gradient(90deg,var(--c4),var(--c5),var(--c6),var(--c1));transition:width .6s cubic-bezier(.3,1.4,.5,1)}
+.progress b{font-size:1.15rem}
+.badges{display:flex;gap:8px;flex-wrap:wrap}
+.badge{padding:4px 12px;border-radius:999px;background:#f3f0fa;color:#9993ad;font-weight:700}
+.badge.got{background:var(--c3);color:var(--ink);animation:pop .5s}
+@keyframes pop{50%{transform:scale(1.25)}}
+
+/* ---------- filters ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:22px 0 14px}
+.search{flex:1 1 260px;border:3px solid var(--ink);border-radius:16px;padding:10px 16px;background:#fff;min-width:0}
+.tag{border:3px solid transparent;background:#fff;border-radius:999px;padding:6px 14px;font-weight:700;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.tag.active{border-color:var(--ink);background:var(--c3)}
+.count{color:var(--muted);font-weight:700}
+
+/* ---------- cards ---------- */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:24px;padding-bottom:30px}
+.card{--cc:var(--c1);position:relative;background:var(--card);border-radius:26px;box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .25s,box-shadow .25s;border:4px solid transparent;min-width:0;animation:rise .5s both}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}}
+.card:hover{transform:translateY(-8px) rotate(-.6deg);box-shadow:0 18px 40px rgba(60,40,120,.25);border-color:var(--cc)}
+.card .head{background:var(--cc);color:#fff;padding:18px 20px 16px;position:relative;overflow:hidden}
+.card .head::after{content:"";position:absolute;right:-30px;top:-30px;width:130px;height:130px;border-radius:50%;background:rgba(255,255,255,.18)}
+.num{display:inline-grid;place-items:center;min-width:54px;height:54px;padding:0 6px;border-radius:16px;background:#fff;color:var(--cc);font-weight:900;font-size:1.5rem;box-shadow:0 4px 0 rgba(0,0,0,.15)}
+.emoji{position:absolute;right:18px;top:14px;font-size:2.4rem;z-index:1;transition:transform .3s}
+.card:hover .emoji{transform:scale(1.25) rotate(12deg)}
+.card h2{margin:12px 0 0;font-size:1.3rem;line-height:1.35;font-weight:900;position:relative;z-index:1}
+.card .body{padding:16px 20px 20px;display:flex;flex-direction:column;gap:12px;flex:1}
+.card p{margin:0;color:var(--muted)}
+.ctags{display:flex;flex-wrap:wrap;gap:6px}
+.ctags span{background:#f5f2ff;border-radius:999px;padding:2px 12px;font-weight:700;font-size:.9rem;color:#4b3f8f}
+.status{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.pill{border-radius:999px;padding:2px 12px;font-weight:700;font-size:.9rem}
+.pill.seen{background:#d9fbe9;color:#0a7a4c}
+.pill.new{background:#fff1d6;color:#a35a00}
+.fav{border:none;background:none;font-size:1.5rem;padding:0 4px;margin-left:auto;transition:transform .2s}
+.fav:hover{transform:scale(1.3)}
+.actions{display:flex;gap:10px;margin-top:auto;flex-wrap:wrap}
+.go{flex:1 1 auto;text-align:center;text-decoration:none;background:var(--cc);color:#fff;border-radius:16px;padding:12px 16px;font-weight:900;font-size:1.05rem;box-shadow:0 5px 0 rgba(0,0,0,.18)}
+.go:hover{filter:brightness(1.08)}
+.peek{border:3px solid var(--cc);background:#fff;color:var(--ink);border-radius:16px;padding:9px 16px;font-weight:900}
+.card.hide{display:none}
+.card.flash{animation:flash 1.2s}
+@keyframes flash{0%,100%{box-shadow:var(--shadow)}30%,70%{box-shadow:0 0 0 10px var(--c3),var(--shadow)}}
+
+/* ---------- sections ---------- */
+section.box{background:#fff;border-radius:28px;box-shadow:var(--shadow);padding:26px 26px 28px;margin:26px 0}
+section.box h2{margin:0 0 6px;font-size:1.55rem;font-weight:900}
+section.box .sub{color:var(--muted);margin:0 0 16px}
+.timer{display:grid;grid-template-columns:auto 1fr;gap:22px;align-items:center}
+.ring{width:190px;height:190px;position:relative}
+.ring svg{transform:rotate(-90deg)}
+.ring .t{position:absolute;inset:0;display:grid;place-items:center;text-align:center;font-weight:900;font-size:2.4rem;line-height:1.1}
+.ring .t small{display:block;font-size:1rem;color:var(--muted)}
+.slidecard{min-height:150px;border-radius:22px;padding:20px;color:#fff;font-size:1.35rem;font-weight:900;display:flex;align-items:center;justify-content:center;text-align:center;transition:background .4s}
+.tbtns{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
+.quizq{font-size:1.2rem;font-weight:900;margin:8px 0 12px}
+.opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.opt{border:3px solid #e5e0f5;background:#fbfaff;border-radius:18px;padding:14px 16px;text-align:left;font-weight:700;transition:all .15s}
+.opt:hover{border-color:var(--c6);background:#f3edff;transform:translateY(-2px)}
+.result{margin-top:16px;padding:18px;border-radius:18px;background:linear-gradient(135deg,#fff4d1,#ffe0ec);font-weight:700;display:none}
+.result.show{display:block;animation:rise .4s}
+.tips{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.tipc{border-radius:20px;padding:18px;color:var(--ink);cursor:pointer;min-height:120px;perspective:600px;position:relative;font-weight:700;transition:transform .3s}
+.tipc:hover{transform:scale(1.03)}
+.tipc .q{font-size:1.15rem;font-weight:900}
+.tipc .a{display:none;margin-top:8px;font-weight:400}
+.tipc.open .a{display:block;animation:rise .3s}
+
+/* ---------- modal ---------- */
+.modal{position:fixed;inset:0;background:rgba(30,20,60,.6);z-index:100;display:none;align-items:center;justify-content:center;padding:16px}
+.modal.show{display:flex}
+.mbox{background:#fff;border-radius:24px;width:min(1100px,100%);height:min(86vh,900px);display:flex;flex-direction:column;overflow:hidden;animation:rise .3s}
+.mhead{display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--cc,#8338ec);color:#fff;flex-wrap:wrap}
+.mhead b{font-size:1.1rem;margin-right:auto;min-width:0}
+.mhead a,.mhead button{background:#fff;color:var(--ink);border:none;border-radius:12px;padding:8px 14px;font-weight:900;text-decoration:none}
+.mbox iframe{flex:1;border:0;width:100%}
+
+footer{text-align:center;color:var(--muted);padding:30px 0 50px}
+kbd{background:#fff;border:2px solid #cfc8e8;border-bottom-width:4px;border-radius:8px;padding:0 8px;font-family:inherit;font-weight:700}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(120px);background:var(--ink);color:#fff;padding:12px 22px;border-radius:999px;font-weight:700;z-index:200;transition:transform .35s;max-width:calc(100% - 32px);text-align:center}
+.toast.show{transform:translateX(-50%) translateY(0)}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:300}
+
+@media (max-width:640px){
+  :root{--fs:19px}
+  .topbar{position:static}
+  .hero{padding-top:28px}
+  .hero h1{font-size:1.75rem}
+  .grid{grid-template-columns:1fr}
+  .timer{grid-template-columns:1fr;justify-items:center}
+  .slidecard{width:100%}
+  .chips20 i{height:20px}
+  .chips20{gap:3px}
+  section.box{padding:20px 16px}
+}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<canvas id="confetti"></canvas>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="logo">🎤 <span>PechaKucha 互動教室</span></div>
+    <div class="fsgroup" role="group" aria-label="字體大小">
+      <button class="tool" data-fs="21" aria-pressed="true" title="標準字">A</button>
+      <button class="tool" data-fs="24" aria-pressed="false" title="大字">A+</button>
+      <button class="tool" data-fs="27" aria-pressed="false" title="特大字">A++</button>
+    </div>
+    <button class="tool" id="soundBtn" aria-pressed="true" title="開關音效">🔊 音效</button>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>20 張投影片 × 20 秒<br><span class="hl">一起站上舞台發光！</span></h1>
+    <p>這裡收錄 <b id="totalN">9</b> 間 PechaKucha 簡報技巧互動教室。每間教室都有上台技巧、20 秒節奏演練、理解測驗與學習歷程紀錄。挑一間開始吧！</p>
+    <div class="chips20" id="chips20" aria-hidden="true"></div>
+    <div class="hero-actions">
+      <button class="big b1" id="randomBtn">🎲 幫我隨機選一間</button>
+      <button class="big b2" onclick="jump('#quiz')">🧭 測一測適合哪一間</button>
+      <button class="big b3" onclick="jump('#timer')">⏱️ 試玩 20 秒計時</button>
+    </div>
+  </section>
+
+  <div class="progress">
+    <b>🏅 我的探索進度：<span id="seenN">0</span> / <span id="allN">9</span></b>
+    <div class="bar"><div id="barFill"></div></div>
+    <div class="badges" id="badges"></div>
+  </div>
+
+  <div class="filters">
+    <input class="search" id="search" type="search" placeholder="🔍 搜尋教室，例如：AI、計時、緊張…" aria-label="搜尋教室">
+    <div id="tagBox" style="display:flex;flex-wrap:wrap;gap:8px"></div>
+    <span class="count" id="countTxt"></span>
+  </div>
+
+  <div class="grid" id="grid"></div>
+
+  <section class="box" id="timer">
+    <h2>⏱️ PechaKucha 20 秒節奏體驗</h2>
+    <p class="sub">PechaKucha 規則：20 張投影片、每張自動播放 20 秒，總長 6 分 40 秒。按「開始」感受一下 20 秒有多長，試著在時間內說完一個重點！</p>
+    <div class="timer">
+      <div class="ring">
+        <svg width="190" height="190" viewBox="0 0 190 190"><circle cx="95" cy="95" r="82" stroke="#f0ecff" stroke-width="16" fill="none"/>
+          <circle id="arc" cx="95" cy="95" r="82" stroke="url(#gr)" stroke-width="16" fill="none" stroke-linecap="round" stroke-dasharray="515.2" stroke-dashoffset="0"/>
+          <defs><linearGradient id="gr"><stop offset="0" stop-color="#ff5d73"/><stop offset="1" stop-color="#8338ec"/></linearGradient></defs></svg>
+        <div class="t"><div><span id="secTxt">20</span><small>第 <span id="slideNo">1</span> / 20 張</small></div></div>
+      </div>
+      <div>
+        <div class="slidecard" id="slideCard" style="background:linear-gradient(135deg,#ff5d73,#ff9f1c)">按下開始，第一張投影片要說什麼？</div>
+        <div class="tbtns">
+          <button class="big b1" id="tStart">▶ 開始</button>
+          <button class="big b2" id="tNext">⏭ 下一張</button>
+          <button class="big b3" id="tReset">↺ 重來</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="box" id="quiz">
+    <h2>🧭 三題小測驗：我適合從哪一間開始？</h2>
+    <p class="sub">回答三個問題，幫你推薦最適合的教室。</p>
+    <div id="quizArea"></div>
+    <div class="result" id="quizResult"></div>
+  </section>
+
+  <section class="box">
+    <h2>💡 翻翻卡：上台前的 6 個小提醒</h2>
+    <p class="sub">點一下卡片看答案。</p>
+    <div class="tips" id="tips"></div>
+  </section>
+</main>
+
+<footer>
+  鍵盤快捷鍵：按 <kbd>1</kbd>～<kbd>9</kbd> 直接開啟對應教室，<kbd>R</kbd> 隨機選，<kbd>Esc</kbd> 關閉預覽。<br>
+  © PechaKucha 互動教室
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="教室預覽">
+  <div class="mbox" id="mbox">
+    <div class="mhead"><b id="mTitle"></b><a id="mOpen" href="#">🚀 進入教室</a><button id="mClose">✕ 關閉</button></div>
+    <iframe id="mFrame" title="預覽" loading="lazy"></iframe>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+const PAGES=[
+ {f:"PechaKucha互動教室1.html",t:"上台發光！PechaKucha 簡報實驗室",e:"🌟",c:"#ff5d73",d:"學習路線清楚，先練上台不慌的 6 招，再進 20 秒節奏演練室。",tags:["上台技巧","計時演練","測驗"]},
+ {f:"PechaKucha互動教室2.html",t:"上台吧！PechaKucha 簡報特訓室",e:"🎭",c:"#ff9f1c",d:"舞台任務式設計：裝好四招上台前準備，把時間變成你的節拍器。",tags:["上台技巧","計時演練","測驗"]},
+ {f:"PechaKucha互動教室3.html",t:"簡報高手養成班 × PechaKucha 20×20",e:"📈",c:"#2ec4b6",d:"有學習進度追蹤與練習場，PechaKucha 20×20 全攻略一次看完。",tags:["上台技巧","進度追蹤","測驗"]},
+ {f:"PechaKucha互動教室4.html",t:"簡報力！PechaKucha 20×20 互動教室",e:"🚀",c:"#3a86ff",d:"上台報告其實有公式！四步驟越練越強，附 20×20 計時器。",tags:["簡報公式","計時演練","測驗"]},
+ {f:"PechaKucha互動教室5.html",t:"簡報快手 · PechaKucha 互動學堂",e:"⚡",c:"#8338ec",d:"上台簡報八大技巧，加上 AI 簡報教練陪你節奏練習、闖關測驗。",tags:["上台技巧","AI 助教","計時演練","測驗"]},
+ {f:"PechaKucha互動教室6.html",t:"簡報高手養成所 · PechaKucha 20×20",e:"🧘",c:"#06d6a0",d:"七大心法、好簡報骨架、克服上台緊張，再用五步驟做出 PechaKucha。",tags:["上台技巧","克服緊張","AI 助教","測驗"]},
+ {f:"PechaKucha互動教室7.html",t:"說得清楚 · 簡報技巧 × PechaKucha",e:"🗣️",c:"#f15bb5",d:"逐單元學習簡報技巧，完整記錄學習歷程，可下載紀錄與測驗結果。",tags:["上台技巧","學習歷程","測驗"]},
+ {f:"PechaKucha互動教室8.html",t:"站上舞台 · 簡報技巧課程",e:"🤖",c:"#ff6b35",d:"由 AI 助教一步步帶你完成一場自己的 PechaKucha，可匯出 Word 紀錄。",tags:["AI 助教","學習歷程"]},
+ {f:"PechaKucha互動教室9.html",t:"簡報表達力 × PechaKucha 20×20 學習站",e:"🖼️",c:"#5e60ce",d:"三堂課：核心技巧、投影片是視覺舞台、20×20 規則，附反思與教師建議。",tags:["投影片設計","計時演練","測驗","教師建議"]}
+];
+const KEY="pkHub_";
+const store={get(k,d){try{const v=localStorage.getItem(KEY+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+             set(k,v){try{localStorage.setItem(KEY+k,JSON.stringify(v))}catch(e){}}};
+let seen=store.get("seen",[]), favs=store.get("favs",[]), soundOn=store.get("sound",true), activeTag="全部";
+
+/* ---------- sound (Web Audio, no files) ---------- */
+let ac;
+function tone(freq,dur=.12,type="sine",vol=.18,delay=0){
+  if(!soundOn)return;
+  try{ac=ac||new (window.AudioContext||window.webkitAudioContext)();
+    const o=ac.createOscillator(),g=ac.createGain(),t=ac.currentTime+delay;
+    o.type=type;o.frequency.setValueAtTime(freq,t);g.gain.setValueAtTime(vol,t);g.gain.exponentialRampToValueAtTime(.001,t+dur);
+    o.connect(g).connect(ac.destination);o.start(t);o.stop(t+dur+.02);}catch(e){}
+}
+const sfx={
+  click:()=>tone(660,.08,"triangle"),
+  hover:()=>tone(980,.05,"sine",.06),
+  open:()=>{tone(523,.1,"triangle");tone(784,.14,"triangle",.18,.08)},
+  tag:()=>tone(740,.07,"square",.07),
+  win:()=>[523,659,784,1047].forEach((f,i)=>tone(f,.18,"triangle",.2,i*.11)),
+  tick:()=>tone(1200,.03,"square",.05),
+  beep:()=>tone(880,.25,"sawtooth",.12),
+  spin:i=>tone(400+i*40,.05,"triangle",.1),
+  wrong:()=>tone(200,.2,"sawtooth",.1)
+};
+
+/* ---------- font size ---------- */
+function setFs(px){document.documentElement.style.setProperty("--fs",px+"px");
+  document.querySelectorAll("[data-fs]").forEach(b=>b.setAttribute("aria-pressed",b.dataset.fs==px));store.set("fs",px)}
+document.querySelectorAll("[data-fs]").forEach(b=>b.onclick=()=>{setFs(+b.dataset.fs);sfx.click()});
+const savedFs=store.get("fs",null); if(savedFs && innerWidth>640) setFs(savedFs);
+const soundBtn=document.getElementById("soundBtn");
+function paintSound(){soundBtn.textContent=soundOn?"🔊 音效":"🔇 靜音";soundBtn.setAttribute("aria-pressed",soundOn)}
+soundBtn.onclick=()=>{soundOn=!soundOn;store.set("sound",soundOn);paintSound();sfx.click()};paintSound();
+
+/* ---------- hero 20 chips ---------- */
+const chipColors=["#ff5d73","#ff9f1c","#ffd23f","#2ec4b6","#3a86ff","#8338ec","#f15bb5","#06d6a0"];
+const chips=document.getElementById("chips20");
+for(let i=0;i<20;i++){const c=document.createElement("i");chips.appendChild(c)}
+let chipI=0;setInterval(()=>{const all=chips.children;[...all].forEach((c,i)=>{const on=i<=chipI;c.classList.toggle("on",i===chipI);c.style.background=on?chipColors[i%8]:"#eee"});chipI=(chipI+1)%21},450);
+
+/* ---------- cards ---------- */
+const grid=document.getElementById("grid");
+function toast(m){const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),2200)}
+function markSeen(i){if(!seen.includes(i)){seen.push(i);store.set("seen",seen)}paintProgress(true)}
+function render(){
+  grid.innerHTML="";
+  PAGES.forEach((p,i)=>{
+    const el=document.createElement("article");el.className="card";el.style.setProperty("--cc",p.c);el.style.animationDelay=(i*.06)+"s";el.dataset.i=i;
+    el.innerHTML=`<div class="head"><span class="emoji">${p.e}</span><span class="num">${i+1}</span><h2>${p.t}</h2></div>
+      <div class="body"><p>${p.d}</p><div class="ctags">${p.tags.map(t=>`<span>#${t}</span>`).join("")}</div>
+      <div class="status">${seen.includes(i)?'<span class="pill seen">✅ 已造訪</span>':'<span class="pill new">✨ 尚未探索</span>'}
+        <button class="fav" aria-label="加入最愛" title="加入最愛">${favs.includes(i)?"⭐":"☆"}</button></div>
+      <div class="actions"><a class="go" href="${encodeURI(p.f)}">🚀 進入教室 ${i+1}</a><button class="peek">👀 預覽</button></div></div>`;
+    el.querySelector(".go").addEventListener("click",e=>{markSeen(i);sfx.open();e.preventDefault();const h=e.currentTarget.href;setTimeout(()=>location.href=h,220)});
+    el.querySelector(".peek").onclick=()=>openModal(i);
+    el.querySelector(".fav").onclick=e=>{favs=favs.includes(i)?favs.filter(x=>x!==i):[...favs,i];store.set("favs",favs);sfx.tag();e.currentTarget.textContent=favs.includes(i)?"⭐":"☆";toast(favs.includes(i)?"已加入最愛 ⭐":"已移出最愛");if(activeTag==="⭐ 最愛")applyFilter()};
+    el.addEventListener("mouseenter",sfx.hover);
+    grid.appendChild(el);
+  });
+  applyFilter();
+}
+/* ---------- tags & search ---------- */
+const tagBox=document.getElementById("tagBox");
+const allTags=["全部","⭐ 最愛",...new Set(PAGES.flatMap(p=>p.tags))];
+allTags.forEach(t=>{const b=document.createElement("button");b.className="tag"+(t==="全部"?" active":"");b.textContent=t;
+  b.onclick=()=>{activeTag=t;[...tagBox.children].forEach(x=>x.classList.toggle("active",x===b));sfx.tag();applyFilter()};tagBox.appendChild(b)});
+const search=document.getElementById("search");search.oninput=applyFilter;
+function applyFilter(){
+  const q=search.value.trim().toLowerCase();let n=0;
+  [...grid.children].forEach(el=>{const i=+el.dataset.i,p=PAGES[i];
+    const okTag=activeTag==="全部"||(activeTag==="⭐ 最愛"?favs.includes(i):p.tags.includes(activeTag));
+    const okQ=!q||(p.t+p.d+p.tags.join(" ")+(i+1)).toLowerCase().includes(q);
+    el.classList.toggle("hide",!(okTag&&okQ));if(okTag&&okQ)n++});
+  document.getElementById("countTxt").textContent=`顯示 ${n} / ${PAGES.length} 間`;
+}
+/* ---------- progress ---------- */
+const BADGES=[[1,"🐣 初次登台"],[3,"🎤 小講者"],[6,"🔥 節奏達人"],[9,"👑 全教室制霸"]];
+function paintProgress(anim){
+  const n=seen.length,N=PAGES.length;
+  document.getElementById("seenN").textContent=n;document.getElementById("allN").textContent=N;document.getElementById("totalN").textContent=N;
+  document.getElementById("barFill").style.width=(n/N*100)+"%";
+  const had=store.get("badges",0);
+  document.getElementById("badges").innerHTML=BADGES.map(([k,l])=>`<span class="badge ${n>=k?"got":""}">${l}</span>`).join("");
+  const now=BADGES.filter(([k])=>n>=k).length;
+  if(anim&&now>had){sfx.win();confetti();toast("獲得徽章："+BADGES[now-1][1])}
+  store.set("badges",now);
+}
+/* ---------- modal ---------- */
+const modal=document.getElementById("modal"),mFrame=document.getElementById("mFrame");
+function openModal(i){const p=PAGES[i];document.getElementById("mbox").style.setProperty("--cc",p.c);
+  document.getElementById("mTitle").textContent=`${i+1}. ${p.t}`;const o=document.getElementById("mOpen");o.href=encodeURI(p.f);
+  o.onclick=()=>markSeen(i);mFrame.src=encodeURI(p.f);modal.classList.add("show");sfx.open()}
+function closeModal(){modal.classList.remove("show");mFrame.src="about:blank";sfx.click()}
+document.getElementById("mClose").onclick=closeModal;
+modal.onclick=e=>{if(e.target===modal)closeModal()};
+
+/* ---------- random picker ---------- */
+function randomPick(){
+  const cards=[...grid.children].filter(c=>!c.classList.contains("hide"));if(!cards.length)return;
+  let k=0,steps=14+Math.floor(Math.random()*cards.length);
+  (function step(){cards.forEach(c=>c.classList.remove("flash"));const c=cards[k%cards.length];void c.offsetWidth;c.classList.add("flash");sfx.spin(k%12);
+    if(k<steps){k++;setTimeout(step,70+k*12)}else{c.scrollIntoView({behavior:"smooth",block:"center"});sfx.win();toast(`🎲 就決定是：教室 ${+c.dataset.i+1}！`)}})();
+}
+document.getElementById("randomBtn").onclick=randomPick;
+function jump(s){sfx.click();document.querySelector(s).scrollIntoView({behavior:"smooth"})}
+
+/* ---------- 20s timer ---------- */
+const PROMPTS=["開場：用一個問題抓住大家","我是誰？一句話自我介紹","今天的主題是什麼？","為什麼這件事重要？","說一個小故事","放一張大圖，少字","一個驚人的數字","比較：以前 vs. 現在","最重要的觀點 #1","最重要的觀點 #2","最重要的觀點 #3","舉一個生活例子","大家可能的疑問","我的回答","轉折：但是…","行動建議","你可以怎麼開始？","回扣開場的問題","一句話總結","謝謝大家！收尾微笑 😊"];
+let sec=20,slide=1,timerId=null;
+const arc=document.getElementById("arc"),secTxt=document.getElementById("secTxt"),slideNo=document.getElementById("slideNo"),slideCard=document.getElementById("slideCard");
+function paintTimer(){secTxt.textContent=sec;slideNo.textContent=slide;arc.style.strokeDashoffset=515.2*(1-sec/20);
+  slideCard.textContent=`第 ${slide} 張：${PROMPTS[slide-1]}`;const a=chipColors[(slide-1)%8],b=chipColors[slide%8];slideCard.style.background=`linear-gradient(135deg,${a},${b})`}
+function nextSlide(){if(slide>=20){stopT();sfx.win();confetti();toast("🎉 完成 20 張！總長 6 分 40 秒");return}slide++;sec=20;sfx.beep();paintTimer()}
+function stopT(){clearInterval(timerId);timerId=null;document.getElementById("tStart").textContent="▶ 開始"}
+document.getElementById("tStart").onclick=()=>{if(timerId){stopT();sfx.click();return}sfx.open();paintTimer();
+  document.getElementById("tStart").textContent="⏸ 暫停";timerId=setInterval(()=>{sec--;if(sec<=3&&sec>0)sfx.tick();if(sec<=0)nextSlide();else paintTimer()},1000)};
+document.getElementById("tNext").onclick=()=>{nextSlide()};
+document.getElementById("tReset").onclick=()=>{stopT();sec=20;slide=1;paintTimer();slideCard.textContent="按下開始，第一張投影片要說什麼？";sfx.click()};
+
+/* ---------- quiz ---------- */
+const QS=[
+ {q:"1. 想到上台報告，你的感覺是？",o:[["😰 很緊張，腿會抖",[5,1]],["🙂 還好，但不知道怎麼講得好",[0,3]],["😎 不怕，只想更厲害",[4,8]]]},
+ {q:"2. 你比較喜歡哪種學習方式？",o:[["🤖 有 AI 助教一步步帶我",[7,4,5]],["⏱️ 直接計時實戰練習",[1,3,0]],["📚 先把觀念讀清楚",[8,2,6]]]},
+ {q:"3. 這次你最想帶走什麼？",o:[["🖼️ 做出好看的投影片",[8,3]],["📊 完整的學習歷程紀錄",[6,7,2]],["🎤 自信上台的技巧",[0,5,1]]]}
+];
+let qi=0,score=Array(PAGES.length).fill(0);
+function paintQuiz(){
+  const area=document.getElementById("quizArea"),r=document.getElementById("quizResult");
+  if(qi>=QS.length){
+    const best=score.indexOf(Math.max(...score)),p=PAGES[best];area.innerHTML="";
+    r.innerHTML=`🎯 推薦你從 <b>教室 ${best+1}：${p.t}</b> ${p.e} 開始！<br>${p.d}<div class="tbtns"><a class="go" style="--cc:${p.c};background:${p.c}" href="${encodeURI(p.f)}">🚀 前往教室 ${best+1}</a><button class="peek" style="border-color:${p.c}" id="qAgain">↺ 再測一次</button></div>`;
+    r.classList.add("show");sfx.win();confetti();
+    r.querySelector(".go").onclick=()=>markSeen(best);
+    document.getElementById("qAgain").onclick=()=>{qi=0;score.fill(0);r.classList.remove("show");sfx.click();paintQuiz()};return;
+  }
+  const Q=QS[qi];area.innerHTML=`<div class="quizq">${Q.q}</div><div class="opts">${Q.o.map((o,k)=>`<button class="opt" data-k="${k}">${o[0]}</button>`).join("")}</div>`;
+  area.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{Q.o[+b.dataset.k][1].forEach((pi,rank)=>score[pi]+=3-rank);qi++;sfx.click();paintQuiz()});
+}
+
+/* ---------- tips ---------- */
+const TIPS=[["為什麼每張只有 20 秒？","逼你只講重點！一張投影片一個想法，節奏緊湊，聽眾不會分心。"],["投影片上要放多少字？","越少越好。用大圖或一個關鍵字，讓聽眾看你、聽你說。"],["緊張時怎麼辦？","深呼吸 4 秒、吐氣 6 秒；看著友善的臉；把注意力放在「分享」而不是「表現」。"],["怎麼開場比較吸引人？","用一個問題、一個驚人數字，或一個小故事開始。"],["講不完怎麼辦？","PechaKucha 不等人！先講最重要的一句，練習時就刪掉多餘的話。"],["怎麼練習最有效？","錄音或錄影自己練 3 次以上，每次只改善一件事。"]];
+const tips=document.getElementById("tips");
+TIPS.forEach(([q,a],i)=>{const d=document.createElement("div");d.className="tipc";d.style.background=`linear-gradient(135deg,${chipColors[i]}33,${chipColors[(i+3)%8]}33)`;
+  d.innerHTML=`<div class="q">❓ ${q}</div><div class="a">💡 ${a}</div>`;d.tabIndex=0;
+  d.onclick=d.onkeydown=e=>{if(e.type==="keydown"&&e.key!=="Enter")return;d.classList.toggle("open");sfx.tag()};tips.appendChild(d)});
+
+/* ---------- confetti ---------- */
+const cv=document.getElementById("confetti"),cx=cv.getContext("2d");let parts=[],raf;
+function confetti(){cv.width=innerWidth;cv.height=innerHeight;
+  for(let i=0;i<140;i++)parts.push({x:innerWidth/2,y:innerHeight/3,vx:(Math.random()-.5)*16,vy:Math.random()*-14-4,s:6+Math.random()*8,c:chipColors[i%8],r:Math.random()*6,life:120});
+  if(!raf)loop()}
+function loop(){cx.clearRect(0,0,cv.width,cv.height);parts=parts.filter(p=>p.life-->0);
+  parts.forEach(p=>{p.vy+=.45;p.x+=p.vx;p.y+=p.vy;p.r+=.2;cx.save();cx.translate(p.x,p.y);cx.rotate(p.r);cx.fillStyle=p.c;cx.fillRect(-p.s/2,-p.s/4,p.s,p.s/2);cx.restore()});
+  raf=parts.length?requestAnimationFrame(loop):(cx.clearRect(0,0,cv.width,cv.height),null)}
+
+/* ---------- keyboard ---------- */
+document.addEventListener("keydown",e=>{
+  if(e.target.matches("input,textarea"))return;
+  if(e.key==="Escape"&&modal.classList.contains("show"))closeModal();
+  else if(/^[1-9]$/.test(e.key)&&+e.key<=PAGES.length){const i=+e.key-1;markSeen(i);sfx.open();setTimeout(()=>location.href=encodeURI(PAGES[i].f),200)}
+  else if(e.key.toLowerCase()==="r"&&!e.ctrlKey&&!e.metaKey)randomPick();
+});
+window.addEventListener("pageshow",()=>{seen=store.get("seen",[]);render();paintProgress(false)});
+render();paintProgress(false);paintQuiz();
+</script>
+</body>
+</html>
